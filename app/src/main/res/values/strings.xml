@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SendMessage</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="et_message">Escribe aquí tu mensaje...</string>
+    <string name="bt_send">Enviar</string>
+    <string name="textview">Activity 2</string>
+    <string name="todo">TODO</string>
+    <string name="tv_title">APP SMS</string>
+    <string name="tv_message">Mensaje</string>
+    <string name="tv_user">Remitente: %1$s</string>
+    <string name="tv_user_default">Remitente</string>
+</resources>

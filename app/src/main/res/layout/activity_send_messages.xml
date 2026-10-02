@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical"
+    android:layout_margin="30dp" >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_title"
+        android:textSize="@dimen/tvTitle_textSize"
+        android:fontFamily="@font/svetze"
+        android:background="@color/purple_700"
+        android:textColor="@color/white"/>
+
+    <EditText
+        android:id="@+id/etMessageText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/et_message"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_send" />
+</LinearLayout>
