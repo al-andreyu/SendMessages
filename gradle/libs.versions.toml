@@ -12,6 +12,7 @@ navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 dokka = "2.2.0"
 aboutus = "0.3.0"
+kotlin = "2.4.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,4 +29,6 @@ material-aboutus = { group = "com.github.jrvansuita", name = "MaterialAbout", ve
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-dokka = { id="org.jetbrains.dokka", version.ref="dokka" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

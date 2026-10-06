@@ -4,6 +4,7 @@ import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.dokka)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -60,7 +61,7 @@ dependencies {
 dokka {
     dokkaPublications.configureEach {
         outputDirectory.set(file("../documentation"))
-        suppressInheritedMembers.set(true)
+        // suppressInheritedMembers.set(true)
     }
     dokkaSourceSets.configureEach {
         documentedVisibilities.set(

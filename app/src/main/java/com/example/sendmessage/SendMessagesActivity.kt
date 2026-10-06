@@ -25,19 +25,25 @@ import com.example.sendmessage.model.Person
  * @see android.os.Bundle
  */
 class SendMessagesActivity : AppCompatActivity() {
+    /** Campo de texto para ingresar el contenido del mensaje. */
     lateinit var etMessageText: EditText
+
+    /** Botón para enviar el mensaje a la siguiente actividad. */
     lateinit var btSend: Button
 
     /**
-     * Clave utilizada para pasar el mensaje como extra en el [Intent].
+     * Objeto de compañía con constantes globales de la actividad.
      */
     companion object {
+        /** Clave utilizada para pasar el mensaje como extra en el [Intent]. */
         const val KEY_MESSAGE = "KEY_MESSAGE"
+
+        /** Etiqueta para los mensajes de depuración en LogCat. */
         const val TAG = "LogSendMessagesActivity"
     }
 
     /**
-     * Método llamado al crear la actividad. Se encarga de inicializar la interfaz de usuario,
+     * Función llamada al crear la actividad. Se encarga de inicializar la interfaz de usuario,
      * enlazar los componentes visuales y configurar los eventos de clic.
      *
      * Como medida de aprendizaje, aquí se muestra cómo pasar datos dato a dato utilizando un [Bundle]:
@@ -82,32 +88,37 @@ class SendMessagesActivity : AppCompatActivity() {
         val receiver = Person("87654321B", "María", "López")
 
         val message = Message(1, etMessageText.text.toString(), sender, receiver)
-        bundle.putSerializable(KEY_MESSAGE, message)
+        bundle.putParcelable(KEY_MESSAGE, message)
         intent.putExtras(bundle)
         startActivity(intent)
     }
 
     //region Ciclo de Vida de una Actividad
+    /** Función llamada cuando la actividad se vuelve visible para el usuario. */
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "SendMessagesActivity -> onStart()")
     }
 
+    /** Función llamada cuando la actividad comienza a interactuar con el usuario. */
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "SendMessagesActivity -> onResume()")
     }
 
+    /** Función llamada cuando la actividad pierde el foco pero sigue siendo visible. */
     override fun onPause() {
         super.onPause()
         Log.d(TAG, "SendMessagesActivity -> onPause()")
     }
 
+    /** Función llamada cuando la actividad ya no es visible para el usuario. */
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "SendMessagesActivity -> onStop()")
     }
 
+    /** Función llamada antes de que la actividad sea destruida. */
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "SendMessagesActivity -> onDestroy()")
