@@ -1,6 +1,6 @@
-# SendMessage - Aplicación Android
+# SendMessage - App Android en Kotlin para enviar mensajes entre actividades
 
-Aplicación nativa para Android desarrollada en Kotlin que permite redactar y enviar mensajes entre dos actividades (`SendMessagesActivity` y `ViewMessageActivity`) utilizando un `Intent` con un `Bundle`.
+Aplicación nativa para Android desarrollada en Kotlin que permite redactar y enviar mensajes entre dos actividades (`SendMessagesActivity` y `ViewMessageActivity`) utilizando un `Intent` con un `Bundle`. Proyecto de ejemplo de desarrollo Android con XML Views, Material Design y arquitectura MVC.
 
 ---
 
@@ -12,7 +12,38 @@ Aplicación nativa para Android desarrollada en Kotlin que permite redactar y en
 
 ---
 
-## 🏗️ Estructura del Proyecto y Decisiones de Diseño
+## ✨ Características
+
+- **Envío de mensajes entre actividades:** transmite el texto desde `SendMessagesActivity` hasta `ViewMessageActivity` mediante un `Intent` explícito y un `Bundle` con la clave `KEY_MESSAGE`.
+- **Modelo de datos Parcelable:** clases `Message` y `Person` anotadas con `@Parcelize` (kotlin-parcelize).
+- **Navegación integrada:** grafo de navegación con Navigation Component (`res/navigation/nav_graph.xml`).
+- **UI con XML Views y Material Design:** ConstraintLayout, ViewBinding y tema Material.
+- **Internacionalización:** textos en `res/values/strings.xml` (español) e `res/values-en/strings.xml` (inglés), sin cadenas hardcodeadas.
+- **Dimensiones centralizadas:** tamaños y márgenes en `res/values/dimens.xml` con cualificadores (`land`, `w600dp`, `w1240dp`).
+- **Pantalla "Acerca de":** integración de la librería MaterialAbout.
+- **Edge-to-edge:** contenido a pantalla completa sin solaparse con las barras del sistema (insets aplicados en ambas actividades).
+- **Documentación KDoc:** generada con Dokka en la carpeta `documentation/`.
+
+---
+
+## 🏗️ Arquitectura y Stack Tecnológico
+
+### Stack Tecnológico
+
+| Categoría | Tecnología |
+| :--- | :--- |
+| Lenguaje | Kotlin 2.4.20 |
+| Build System | Gradle 9.6.0 con AGP 9.4.1 y version catalog (`gradle/libs.versions.toml`) |
+| SDK | compileSdk / targetSdk 37, minSdk 24 (Android 7.0) |
+| Java | JDK 11 (source/target compatibility) |
+| UI | XML Views, ConstraintLayout 2.1.4, Material Components 1.10.0, ViewBinding |
+| Navegación | Navigation Component 2.6.0 (`navigation-fragment-ktx`, `navigation-ui-ktx`) |
+| Arquitectura | MVC nativo con actividades independientes |
+| Datos | Modelos `Parcelable` con `@Parcelize` (kotlin-parcelize) |
+| AndroidX | core-ktx 1.19.0, appcompat 1.6.1, activity-ktx 1.13.0 |
+| Terceros | MaterialAbout 0.3.0 (JitPack) |
+| Documentación | Dokka 2.2.0 → `documentation/` |
+| Testing | JUnit 4.13.2, Espresso 3.7.0, androidx.test.ext:junit 1.3.0 |
 
 ### Estructura de Paquetes
 ```
@@ -20,7 +51,10 @@ app/src/main/
 ├── java/com/example/sendmessage/
 │   ├── SendMessageApplication.kt  # Clase global de la aplicación (Application)
 │   ├── SendMessagesActivity.kt    # Actividad principal para redactar el mensaje
-│   └── ViewMessageActivity.kt     # Actividad secundaria para visualizar el mensaje
+│   ├── ViewMessageActivity.kt     # Actividad secundaria para visualizar el mensaje
+│   └── model/
+│       ├── Message.kt             # Modelo de mensaje Parcelable (id, content, sender, receiver)
+│       └── Person.kt              # Modelo de persona Parcelable (dni, name, surname)
 └── res/
     ├── layout/
     │   ├── activity_send_messages.xml  # Diseño UI de la pantalla principal
@@ -43,6 +77,43 @@ app/src/main/
   - `iv` para `ImageView` (ej. `ivImage`).
 - **Eliminación de Cadenas Hardcodeadas:** Todos los textos de interfaz están centralizados en `res/values/strings.xml` para cumplir con las mejores prácticas y soportar internacionalización.
 - **Dimensiones Centralizadas:** Los tamaños de texto y márgenes se gestionan centralizadamente en `res/values/dimens.xml`.
+- **Edge-to-edge y barras del sistema:** el tema (`res/values-v23/themes.xml`) usa barras de sistema transparentes. `ViewMessageActivity` aplica los insets en código (`ViewCompat.setOnApplyWindowInsetsListener` sobre `R.id.main`) y `SendMessagesActivity` mediante `android:fitsSystemWindows="true"` en la raíz de `activity_send_messages.xml`, por lo que el contenido no queda bajo la barra de estado ni la barra de navegación.
+
+---
+
+## 🚀 Comenzando
+
+### Requisitos previos
+
+- **Android Studio** con soporte para Android Gradle Plugin 9.4.1.
+- **JDK 11** o superior.
+- **Gradle 9.6.0** (incluido mediante Gradle Wrapper: `gradlew`).
+- Dispositivo o emulador con **Android 7.0 (API 24)** o superior.
+
+### Instalación y ejecución
+
+1. Clonar el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
+2. Abrir el proyecto en Android Studio (**File → Open**) y esperar a que sincronice Gradle.
+3. Conectar un dispositivo con depuración USB activada o crear un emulador (**Device Manager**).
+4. Ejecutar la configuración de run **app** (botón ▶) para instalar y lanzar la aplicación.
+
+---
+
+## 📦 Módulos y Componentes Principales
+
+| Componente | Ruta | Descripción |
+| :--- | :--- | :--- |
+| `SendMessageApplication` | `java/com/example/sendmessage/` | Clase `Application` global |
+| `SendMessagesActivity` | `java/com/example/sendmessage/` | Actividad principal (launcher): redacta y envía el mensaje |
+| `ViewMessageActivity` | `java/com/example/sendmessage/` | Actividad secundaria: muestra el mensaje recibido |
+| `Message` | `java/com/example/sendmessage/model/` | Modelo de mensaje Parcelable |
+| `Person` | `java/com/example/sendmessage/model/` | Modelo de persona Parcelable (dni, name, surname) |
+| `nav_graph.xml` | `res/navigation/` | Grafo de navegación entre pantallas |
+
+> La app no expone API ni endpoints (sin backend); este apartado documenta los módulos internos.
 
 ---
 
@@ -79,3 +150,13 @@ Para verificar los archivos internos de la aplicación en el almacenamiento priv
 - [Paso de datos entre actividades con Bundles y Extras](https://developer.android.com/guide/components/activities/parcels-and-bundles?hl=es-419)
 - [Gestión del Ciclo de Vida de una Actividad](https://developer.android.com/guide/components/activities/activity-lifecycle?hl=es-419)
 - [Recursos de Cadenas de Texto (strings.xml)](https://developer.android.com/guide/topics/resources/string-resource?hl=es-419)
+
+---
+
+## 📄 Licencia y Contacto
+
+- **Manual de usuario:** [MANUAL_USUARIO.md](MANUAL_USUARIO.md)
+- **Registro de cambios:** [CHANGELOG.md](CHANGELOG.md)
+- **Documentación KDoc (Dokka):** [documentation/index.html](documentation/index.html)
+- **Autor:** Andrey Udodov
+- **Licencia:** [Apache License 2.0](LICENSE) — permite usar, modificar y redistribuir el código bajo sus términos.

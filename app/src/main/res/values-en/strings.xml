@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="et_message">Write here your message...</string>
+    <string name="bt_send">Send</string>
+    <string name="textview">Activity 2</string>
+    <string name="todo">TODO</string>
+    <string name="tv_title">APP SMS</string>
+    <string name="tv_message">Message</string>
+    <string name="tv_user">From: %1$s</string>
+    <string name="tv_user_default">Sender</string>
+</resources>

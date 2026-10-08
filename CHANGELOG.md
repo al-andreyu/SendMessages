@@ -4,6 +4,16 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 
 ---
 
+## [v1.1] - 2026-10-08
+
+### Corregido
+- La pantalla principal se dibujaba por debajo de la barra de estado: se añadió `android:fitsSystemWindows="true"` a la raíz `LinearLayout` de `activity_send_messages.xml`, de modo que `SendMessagesActivity` aplica los insets de las barras del sistema (estado y navegación) igual que ya hacía `ViewMessageActivity` en código. El tema (`values-v23/themes.xml`) declara barras transparentes edge-to-edge y con `targetSdk 37` el sistema fuerza ese modo en Android 15+.
+
+### Cambiado
+- Actualización de la documentación: `README.md` describe ahora el manejo de insets/edge-to-edge y se ha creado `AGENTS.md` con los comandos, la arquitectura y las convenciones del repositorio.
+
+---
+
 ## [v1.0] - 2025-09-25
 
 ### Añadido
